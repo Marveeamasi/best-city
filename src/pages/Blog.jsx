@@ -156,7 +156,7 @@ function Blog() {
                        alt={post.title}
                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                      />
-                     <div className="absolute top-4 right-4 bg-[var(--color-card)] px-3 py-1 rounded-full text-sm font-medium text-[var(--color-primary-600)] shadow">
+                     <div className="absolute top-4 right-4 bg-[var(--color-text)] px-3 py-1 rounded-full text-sm font-medium text-[var(--color-bg)] shadow">
                        {categories.find(c => c.id === post.category)?.name}
                      </div>
                    </div>

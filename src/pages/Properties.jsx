@@ -310,7 +310,7 @@ function Properties() {
                     alt={property.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 right-4 bg-[var(--color-card)] px-3 py-1 rounded-full text-[var(--color-primary-600)] font-semibold text-sm shadow">
+                  <div className="absolute top-4 right-4 bg-[var(--color-text)] px-3 py-1 rounded-full text-[var(--color-bg)] font-semibold text-sm shadow">
                     {property.status}
                   </div>
                 </div>

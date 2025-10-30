@@ -105,15 +105,15 @@ function BlogPost() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <article className="bg-[var(--color-card)] rounded-lg shadow-md p-8 border border-[var(--color-border)]">
+            <article className="bg-[var(--color-card)] rounded-lg shadow-md p-8 max-sm:px-3 border border-[var(--color-border)]">
               <div
-                className="prose prose-lg max-w-none
+                className="max-sm:text-center prose prose-lg max-w-none
                   prose-headings:text-[var(--color-text)]
-                  prose-p:text-[var(--color-secondary-700)]
-                  prose-li:text-[var(--color-secondary-700)]
+                  prose-p:text-[var(--color-secondary-300)]
+                  prose-li:text-[var(--color-secondary-300)]
                   prose-strong:text-[var(--color-text)]
                   prose-a:text-[var(--color-primary-600)] hover:prose-a:text-[var(--color-primary-700)]
-                  prose-blockquote:border-l-[var(--color-primary-600)] prose-blockquote:text-[var(--color-secondary-600)]
+                  prose-blockquote:border-l-[var(--color-primary-600)] prose-blockquote:text-[var(--color-secondary-300)]
                   [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold
                   [&_ul]:list-disc [&_ul]:pl-6 [&_ul_li]:mb-2
                   [&_ol]:list-decimal [&_ol]:pl-6 [&_ol_li]:mb-2"

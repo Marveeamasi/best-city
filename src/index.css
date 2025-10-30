@@ -140,6 +140,6 @@
 }
 
 .prose p, .prose li {
-  color: var(--color-secondary-700);
+  color: var(--color-secondary-300);
   line-height: 1.75;
 }
