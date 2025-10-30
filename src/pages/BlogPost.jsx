@@ -49,28 +49,34 @@ function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+      <div className="min-h-screen bg-[var(--color-bg)]">
       {/* Hero Section */}
-      <div className="relative h-[400px]">
+      <div className="relative h-[400px] overflow-hidden">
         <img
           src={post.image}
           alt={post.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute inset-0 flex items-center">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
               className="max-w-3xl text-white"
             >
-              <Link to="/blog" className="inline-flex items-center text-white mb-6 hover:text-primary-300">
+              <Link
+                to="/blog"
+                className="inline-flex items-center text-white mb-6 hover:text-[var(--color-primary-300)] transition-colors"
+              >
                 <FiArrowLeft className="mr-2" />
                 Back to Blog
               </Link>
-              <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-              <div className="flex items-center text-secondary-200 space-x-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                {post.title}
+              </h1>
+              <div className="flex flex-wrap items-center gap-6 text-[var(--color-secondary-200)] text-sm md:text-base">
                 <div className="flex items-center">
                   <FiUser className="mr-2" />
                   {post.author}
@@ -99,12 +105,21 @@ function BlogPost() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div 
-                className="prose prose-lg max-w-none"
+            <article className="bg-[var(--color-card)] rounded-lg shadow-md p-8 border border-[var(--color-border)]">
+              <div
+                className="prose prose-lg max-w-none
+                  prose-headings:text-[var(--color-text)]
+                  prose-p:text-[var(--color-secondary-700)]
+                  prose-li:text-[var(--color-secondary-700)]
+                  prose-strong:text-[var(--color-text)]
+                  prose-a:text-[var(--color-primary-600)] hover:prose-a:text-[var(--color-primary-700)]
+                  prose-blockquote:border-l-[var(--color-primary-600)] prose-blockquote:text-[var(--color-secondary-600)]
+                  [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold
+                  [&_ul]:list-disc [&_ul]:pl-6 [&_ul_li]:mb-2
+                  [&_ol]:list-decimal [&_ol]:pl-6 [&_ol_li]:mb-2"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
-            </div>
+            </article>
           </motion.div>
 
           {/* Sidebar */}
@@ -112,43 +127,51 @@ function BlogPost() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
+            className="space-y-6"
           >
-            <div className="space-y-6">
-              {/* Share */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <FiShare2 className="mr-2" />
-                  Share this article
-                </h3>
-                <div className="flex space-x-4">
-                  <button className="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200">
-                    <FaFacebook size={20} />
-                  </button>
-                  <button className="p-2 rounded-full bg-sky-100 text-sky-500 hover:bg-sky-200">
-                    <FaTwitter size={20} />
-                  </button>
-                  <button className="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200">
-                    <FaLinkedin size={20} />
-                  </button>
-                </div>
+            {/* Share */}
+            <div className="bg-[var(--color-card)] rounded-lg shadow-md p-6 border border-[var(--color-border)]">
+              <h3 className="text-lg font-semibold mb-4 flex items-center text-[var(--color-text)]">
+                <FiShare2 className="mr-2 text-[var(--color-primary-600)]" />
+                Share this article
+              </h3>
+              <div className="flex space-x-3">
+                <button
+                  aria-label="Share on Facebook"
+                  className="p-2.5 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors"
+                >
+                  <FaFacebook size={20} />
+                </button>
+                <button
+                  aria-label="Share on Twitter"
+                  className="p-2.5 rounded-full bg-sky-100 text-sky-500 hover:bg-sky-200 transition-colors"
+                >
+                  <FaTwitter size={20} />
+                </button>
+                <button
+                  aria-label="Share on LinkedIn"
+                  className="p-2.5 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors"
+                >
+                  <FaLinkedin size={20} />
+                </button>
               </div>
+            </div>
 
-              {/* Tags */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <FiTag className="mr-2" />
-                  Tags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-secondary-100 text-secondary-600 rounded-full text-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            {/* Tags */}
+            <div className="bg-[var(--color-card)] rounded-lg shadow-md p-6 border border-[var(--color-border)]">
+              <h3 className="text-lg font-semibold mb-4 flex items-center text-[var(--color-text)]">
+                <FiTag className="mr-2 text-[var(--color-primary-600)]" />
+                Tags
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1.5 bg-[var(--color-secondary-50)] text-[var(--color-secondary-300)] rounded-full text-sm font-medium border border-[var(--color-border)]"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </motion.div>

@@ -114,36 +114,62 @@ We aim to respond to all inquiries within 48 hours.`
   ];
 
   return (
-    <div className="min-h-screen bg-secondary-50 py-16">
+    <div className="min-h-screen bg-[var(--color-bg)] py-16">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl font-bold text-center mb-4">Privacy Policy</h1>
-          <p className="text-secondary-600 text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-[var(--color-text)]">
+            Privacy Policy
+          </h1>
+          <p className="text-[var(--color-secondary-300)] text-center mb-12 text-sm md:text-base">
             Last updated: March 15, 2024
           </p>
 
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="space-y-8">
+          <article className="bg-[var(--color-card)] rounded-lg shadow-md p-8 max-sm:px-3 md:p-10 border border-[var(--color-border)]">
+            <div className="prose prose-lg max-w-none space-y-10">
               {sections.map((section, index) => (
-                <motion.div
+                <motion.section
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="scroll-mt-24"
+                  id={`section-${index}`}
                 >
-                  <h2 className="text-2xl font-semibold mb-4">{section.title}</h2>
-                  <div className="text-secondary-600 whitespace-pre-line">
-                    {section.content}
-                  </div>
-                </motion.div>
+                  <h2 className="text-2xl font-semibold mb-4 text-[var(--color-text)] max-sm:text-center">
+                    {section.title}
+                  </h2>
+                  <div
+                    className="text-[var(--color-secondary-300)] whitespace-pre-line leading-relaxed max-sm:text-center"
+                    dangerouslySetInnerHTML={{ __html: section.content.replace(/\n/g, '<br>') }}
+                  />
+                </motion.section>
               ))}
             </div>
+          </article>
+
+          
+          <div className="mt-12 bg-[var(--color-card)] rounded-lg p-6 max-sm:px-3 border border-[var(--color-border)]">
+            <h3 className="text-lg font-semibold mb-4 text-[var(--color-text)]">Quick Navigation</h3>
+            <ul className="space-y-2">
+              {sections.map((section, index) => (
+                <li key={index}>
+                  <a
+                    href={`#section-${index}`}
+                    className="text-[var(--color-primary-600)] hover:text-[var(--color-primary-700)] transition-colors"
+                  >
+                    {section.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
+         
         </motion.div>
       </div>
     </div>

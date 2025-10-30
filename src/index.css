@@ -4,13 +4,63 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  user-select: none;
+}
+
+/* ROOT VARIABLES */
+:root {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-300: #475569;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+
+  --color-bg: #ffffff;
+  --color-text: #1e293b;
+  --color-card: #ffffff;
+  --color-border: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-text: #f1f5f9;
+  --color-card: #1e293b;
+  --color-border: #334155;
+
+  --color-primary-50: #1e293b;
+    --color-secondary-50: #090e1a;
+  --color-primary-100: #334155;
+  --color-secondary-300: #a2b1c3;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #60a5fa;
+  --color-primary-700: #93c5fd;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply font-sans text-secondary-800 bg-secondary-50;
+    @apply font-sans antialiased;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* Preload critical font to avoid 404 */
+  @font-face {
+    font-family: 'Nunito Sans';
+    src: url('https://fonts.gstatic.com/s/nunitosans/v15/pe0qMImSLYBIv1o4X1M8cce9I9s.woff2') format('woff2');
+    font-display: swap;
   }
 }
 
@@ -20,18 +70,76 @@
   }
   
   .btn {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[var(--color-primary-600)] hover:bg-[var(--color-primary-700)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-500)];
   }
   
   .btn-secondary {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-[var(--color-primary-700)] bg-[var(--color-primary-100)] hover:bg-[var(--color-primary-200)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary-500)];
   }
   
   .input {
-    @apply block w-full rounded-md border-secondary-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+    @apply block w-full rounded-md border bg-white dark:bg-[var(--color-card)] border-[var(--color-border)] shadow-sm focus:border-[var(--color-primary-500)] focus:ring-[var(--color-primary-500)] sm:text-sm text-[var(--color-text)];
   }
   
   .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    @apply bg-[var(--color-card)] rounded-lg shadow-md overflow-hidden border border-[var(--color-border)];
   }
+
+  /* Theme Toggle */
+  .theme-toggle {
+    @apply relative inline-flex items-center h-6 w-11 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+  }
+
+  .theme-toggle input {
+    @apply sr-only;
+  }
+
+  .theme-toggle span {
+    @apply absolute inset-0 flex items-center justify-center;
+  }
+
+  .theme-toggle .indicator {
+    @apply inline-block w-4 h-4 bg-white rounded-full shadow transform transition-transform;
+  }
+
+  .theme-toggle[aria-checked="true"] .indicator {
+    @apply translate-x-5;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary-600);
+  border-radius: 7%;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-300);
+}
+
+.prose {
+  color: var(--color-text);
+}
+
+.prose h2 {
+  color: var(--color-text);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose p, .prose li {
+  color: var(--color-secondary-700);
+  line-height: 1.75;
 }
