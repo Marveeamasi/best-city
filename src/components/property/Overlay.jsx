@@ -71,7 +71,7 @@ export const Overlay = () => {
               <p className="text-xs opacity-80">Valuation</p>
             </div>
           </div>
-          <button className="btn w-full lg:w-1/2 mt-6 flex items-center justify-center text-xl">
+          <button className="btn w-full lg:w-1/2 mt-6 flex items-center justify-center text-[var(--color-bg)] text-xl">
             <FaWallet className="mr-2" />
             Invest
           </button>
